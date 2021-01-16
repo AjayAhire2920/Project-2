@@ -1,0 +1,208 @@
+<div class="container">
+    <span class="text-center"><h1>Slam Book</h1></span>
+    <div class="jumbotron">
+        <form action="" id=form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <div class="row  ">
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <label for="name"> </label>
+                            <input type="text"  id="fname" formControlName="name"
+                            placeholder="Name"
+                            class="form-control"  
+                            [ngClass]="{'is-invalid':  name.touched   && name.invalid }"                                                
+                            >
+                            <div class="invalid-feedback">
+                                <div *ngIf="name.errors.required">required!</div>
+                                <div *ngIf="name.errors.minlength"> required! 2</div>
+                            </div>                            
+                         
+                       
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-start">
+                        <label for="lname"></label>
+                            <input type="text" placeholder="Last Name"
+                            formControlName="lname" 
+                            [ngClass]="{'is-invalid':  lname.touched   && lname.invalid }"                                
+                            class="form-control">
+                            <div class="invalid-feedback">
+                                <div *ngIf="lname.errors.required">required!</div>
+                                <div *ngIf="lname.errors.minlength"> required! 2</div>
+                            </div>
+                          
+                    </div>
+                </div>                
+            </div>
+            
+            <div class="form-group">
+                <input type="text" class="form-control" formControlName="email" placeholder="email"  
+                [ngClass]="{'is-invalid': email.touched && email.invalid}">
+                <div *ngIf="email.touched && email.invalid" class="invalid-feedback">
+                 <div *ngIf="email.errors.required" >email is required!</div>
+                  
+             </div>
+             </div>  
+ 
+
+            <!-- Hobbies -->
+
+            <div class="form-group">
+            <div class="form-check-inline">
+                 <h6>Hobbies :</h6>&nbsp;&nbsp;&nbsp;
+                 <label for=""><input type="checkbox" (change)="Changebox($event)" 
+                    formControlName="check" value="football"
+                    class="form-check-input">Football</label>            
+            </div>
+            <div class="form-check-inline">             
+                <label for=""><input type="checkbox" (change)="Changebox($event)"
+                    formControlName="check" value="Cricket"  
+                   class="form-check-input">Cricket</label>            
+           </div>
+                <div class="form-check-inline">               
+                <label for=""><input type="checkbox"  (change)="Changebox($event)"
+                    formControlName="check" value="BasketBall"  
+                class="form-check-input">BasketBall</label> 
+
+             </div>
+           <div class="form-check-inline">              
+                <label for=""><input type="checkbox" (change)="Changebox($event)"
+                    formControlName="check" value="Kho-kho"  
+                 class="form-check-input">Kho-kho</label>            
+             </div>
+            </div>
+
+            <!-- gender -->
+
+            
+            <div class="form-group">
+                <div class="form-check-inline">
+                     <h6>Gender :</h6>&nbsp;&nbsp;&nbsp;
+                     <label for=""><input type="radio" formControlName="gender" value="male"
+                        class="form-check-input">Male</label>            
+                </div>
+                <div class="form-check-inline">             
+                    <label for=""><input type="radio" formControlName="gender" value="female"
+                       class="form-check-input">Female</label>            
+               </div>
+                    <div class="form-check-inline">               
+                    <label for=""><input type="radio" formControlName="gender" value="others"
+                    class="form-check-input">Other.</label> 
+    
+                 </div>
+               
+            </div>
+
+
+            <div form-group>
+                <label for="address">Address </label>
+                    <input type="text"  id="address"
+                    placeholder="Ftno:"
+                    formControlName="address"
+                    class="form-control">               
+            </div>
+
+            <div class=" ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for=""></label>
+                        <input type="text" placeholder="country" name="country"
+                        class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label for=""></label>
+                        <input type="text" placeholder="State"  name="city"
+                        class="form-control">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class=" ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for=""></label>
+                        <input type="text" placeholder="Mobile"
+                        formControlName="mobile"
+                        class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label for=""></label>
+                        <input type="text" placeholder="pincode"
+                        formControlName="pincode"
+                        class="form-control">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group mt-4 ">
+               
+                <div id="additems" class="d-flex justify-content-between">
+                    <span><h6>Skills :</h6></span>
+                    <i class="fa fa-plus" (click)="additem()"></i>
+                </div>
+                <div class="jumbotron bg-light">
+                     <div class="form-group">
+                         <label for=""></label>
+                         <input type="text" value="{{items}}" class="form-control">
+                     </div>
+            </div>
+            </div>
+
+        </form>
+
+        <div class="bottom text-center">
+            <div>
+                <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+    </div>
+</div>
+
+
+
+
+
