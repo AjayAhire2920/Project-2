@@ -1,6 +1,9 @@
+import { splitClasses } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 declare var $ : any;
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-trade-book',
@@ -13,7 +16,8 @@ export class TradeBookComponent implements OnInit {
    form : FormGroup;
    submitted: false;
   checkme: any =[];
-  items: any;
+  items = [];
+  invoice: string;
     
 
   constructor( private fb : FormBuilder) { }
@@ -29,7 +33,8 @@ export class TradeBookComponent implements OnInit {
       'gender':[null],
       'pincode':['',[Validators.required,Validators.pattern]],
       'mobile':['',[Validators.required,Validators.maxLength(10)]],
-      'email':['',[Validators.required, Validators.email]]
+      'email':['',[Validators.required, Validators.email]],
+      'addmenu':[null]
     });
   }
 
@@ -71,45 +76,41 @@ get email(){
    }
  }
 
- additem(){
-   const value = $('#additems').val();
+ additems(){
+   const value = $('#additemmenu').val();
    if((value || '').trim()){
-    this.items.push(value);
+     this.items.push(value);
+     $('#additemmenu').val('');
    }
-   
-   
+ }
+
+ remove(e){
+   const indexItems = this.items.indexOf(e);
+   if(indexItems >= 0){
+      this.items.splice(indexItems,1);
+   }
  }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ generatePdf(pdfgenerator){
+  var data = document.getElementById('pdfgenerator');
+ html2canvas(data).then(canvas => {
+   var imgWidth = 200;
+    var imgHeight = canvas.height * imgWidth / canvas.width;
+   const contentDataURL = canvas.toDataURL('application/pdf')
+   let pdf = new jspdf('p', 'mm', 'a4');
+   var position = 0;
+   pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+   pdf.save("ORDNO"+pdfgenerator+".pdf");
+   var blobPDF = pdf.output('blob');
+   // var blobPDF1 = pdf.output();
+  // var blobUrl = URL.createObjectURL(blobPDF)
+ //  window.open(blobUrl,'_system','location=yes')
+ //  this.PrintOrderId = qrprint3;
+   this.invoice="BillInvoice";
+   $('#printModal').css("display","none")
+ });
+}
 
 
 }

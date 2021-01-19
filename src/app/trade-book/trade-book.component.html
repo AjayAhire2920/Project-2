@@ -4,27 +4,27 @@
         <form action="" id=form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <div class="row  ">
-                    <div class="col-md-6 d-flex justify-content-end">
+                    <div class="col-md-6 ">
                         <label for="name"> </label>
                             <input type="text"  id="fname" formControlName="name"
                             placeholder="Name"
                             class="form-control"  
                             [ngClass]="{'is-invalid':  name.touched   && name.invalid }"                                                
                             >
-                            <div class="invalid-feedback">
+                            <div *ngIf="name.touched   && name.invalid" class="invalid-feedback">
                                 <div *ngIf="name.errors.required">required!</div>
                                 <div *ngIf="name.errors.minlength"> required! 2</div>
                             </div>                            
                          
                        
                     </div>
-                    <div class="col-md-6 d-flex justify-content-start">
+                    <div class="col-md-6 ">
                         <label for="lname"></label>
                             <input type="text" placeholder="Last Name"
                             formControlName="lname" 
                             [ngClass]="{'is-invalid':  lname.touched   && lname.invalid }"                                
                             class="form-control">
-                            <div class="invalid-feedback">
+                            <div *ngIf="lname.touched && lname.invalid" class="invalid-feedback">
                                 <div *ngIf="lname.errors.required">required!</div>
                                 <div *ngIf="lname.errors.minlength"> required! 2</div>
                             </div>
@@ -104,12 +104,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for=""></label>
-                        <input type="text" placeholder="country" name="country"
+                        <input type="text" placeholder="country" formControlName="country"   
                         class="form-control">
                     </div>
                     <div class="col-md-6">
                         <label for=""></label>
-                        <input type="text" placeholder="State"  name="city"
+                        <input type="text" placeholder="State" formControlName="city"
                         class="form-control">
                     </div>
                 </div>
@@ -131,71 +131,43 @@
                         class="form-control">
                     </div>
                 </div>
-
             </div>
 
-            <div class="form-group mt-4 ">
-               
-                <div id="additems" class="d-flex justify-content-between">
-                    <span><h6>Skills :</h6></span>
-                    <i class="fa fa-plus" (click)="additem()"></i>
-                </div>
-                <div class="jumbotron bg-light">
-                     <div class="form-group">
-                         <label for=""></label>
-                         <input type="text" value="{{items}}" class="form-control">
-                     </div>
-            </div>
-            </div>
+            
 
+        <div id="pdfgenerator">
+          <div class="adding-items">
+              <div class="row mt-3">
+                  <div class="col-md-8">
+                    <label >Skills:</label>
+                        <input type="text" class="form-control" id="additemmenu" formControlName="addmenu">
+                      
+                  </div>
+                  <div class="col-md-2 plus">
+                    <i class="fa fa-plus" (click)= "additems()"></i>
+                  </div>
+              </div>
+             
+              
+          </div>
+
+          <div class="remove-items pt-3" *ngFor="let items of items">
+              <label for="">
+              <input type="" class="form-control " value="{{items}}" >
+            </label>
+              <i class="fa fa-close pl-2" (click)="remove(items)" ></i>
+          </div>
+
+          <button class="btn btn-success m-3   " (click)="generatePdf()">Download</button>
+        </div>
+          
         </form>
 
-        <div class="bottom text-center">
+        <div class="bottom text-center mt-4">
             <div>
                 <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             
         
